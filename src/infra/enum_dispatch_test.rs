@@ -1,5 +1,3 @@
-#![cfg(test)]
-
 use enum_dispatch::enum_dispatch;
 
 #[enum_dispatch]
