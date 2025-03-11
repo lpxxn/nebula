@@ -1,8 +1,8 @@
+pub mod csv;
 #[cfg(test)] // 这确保这个模块只在测试时编译
 mod enum_dispatch_test;
-
 // 当前工作目录
-fn get_current_dir() -> String {
+pub fn get_current_dir() -> String {
     use std::env;
     let current_dir = env::current_dir().unwrap();
     current_dir.display().to_string()
