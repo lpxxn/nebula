@@ -1,22 +1,18 @@
-use clap::builder::Str;
-
 #[cfg(test)]
 mod tests {
     #[test]
     fn test_re_borrow() {
         use super::*;
-        // 测试重新借用的例子
         let mut s = String::from("hello");
 
-        // 可变借用
         let r1 = &mut s;
         r1.push_str(", world");
         str_append_v(r1, "aaa");
-        // 重新借用
+
         let r2 = &mut *r1;
         r2.push_str(" hey");
         // assert_eq!(*r2, "hello, world hey");
-        println!("重新借用测试通过: {}", r2);
+        println!("reborrwo: {}", r2);
         r1.push_str("bar");
         println!("r1: {}", r1);
     }
