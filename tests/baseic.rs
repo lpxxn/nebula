@@ -35,6 +35,41 @@ mod tests {
     fn modify(val: &mut i32) {
         *val += 1;
     }
+    #[test]
+    fn test_mutfn() {
+        let mut s = String::from("hello");
+        let sp = || s.push_str("abfc");
+        // sp()
+        update_str(sp);
+    }
+
+    // fn update_str<T>(mut t: T)
+    // where
+    // T: FnMut(),
+    fn update_str<T: FnMut()>(mut t: T) {
+        t();
+    }
+    #[test]
+    fn test_reborrow() {
+        let x = 5;
+        make_mutalbe(x);
+
+        let s = String::from("hello"); // s 是不可变的
+        // 将 s 移动到函数中
+        make_mutable(s);
+        // 此处不能再使用 s，因为它的所有权已经被移动
+        // println!("{}", s);  // 这行会导致编译错误
+    }
+    fn make_mutable(mut t: String) {
+        // t 是一个新的、可变的变量，拥有字符串的所有权
+        t.push_str(" world"); // 可以修改 t
+        println!("t = {}", t); // 输出: "t = hello world"
+    }
+
+    fn make_mutalbe(mut y: i32) {
+        y += 1;
+        println!("y: {}", y)
+    }
 }
 
 fn str_append_v(s: &mut String, v: &str) {
