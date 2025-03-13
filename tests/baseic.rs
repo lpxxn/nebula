@@ -95,7 +95,7 @@ mod tests {
 
         assert_eq!(arr_iter.next(), Some(&"a".to_string()));
         assert_eq!(arr_iter.next(), Some(&"b".to_string()));
-        assert_eq!(arr_iter.next(), Some(&"c".to_string()));
+        assert_eq!(arr_iter.next().map(|s| s.as_str()), Some("c"));
         assert_eq!(arr_iter.next(), None);
         let a2 = &arr[1];
     }
