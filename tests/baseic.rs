@@ -53,12 +53,25 @@ mod tests {
     fn test_reborrow() {
         let x = 5;
         make_mutalbe(x);
+        let mut y = x;
+        y += 1;
+        println!("y: {}", y);
 
         let s = String::from("hello"); // s 是不可变的
         // 将 s 移动到函数中
+        /*
+        当您将一个值传递给函数时，Rust 不是传递原始变量，而是：
+        复制/移动这个值
+        在函数内部创建一个全新的变量来存储这个值
+        这个新变量的可变性完全由函数参数的声明决定，与原始变量无关。
+        */
         make_mutable(s);
         // 此处不能再使用 s，因为它的所有权已经被移动
         // println!("{}", s);  // 这行会导致编译错误
+        let s = String::from("hello"); // s 是不可变的
+        let mut s2 = s; // s2 是可变的
+        s2.push_str(" world"); // 可以修改 s2
+        println!("s2 = {}", s2); // 输出: "s2 = hello world"
     }
     fn make_mutable(mut t: String) {
         // t 是一个新的、可变的变量，拥有字符串的所有权
