@@ -41,6 +41,7 @@ mod tests {
         let sp = || s.push_str("abfc");
         // sp()
         update_str(sp);
+        print!("s: {}", s);
     }
 
     // fn update_str<T>(mut t: T)
@@ -82,6 +83,21 @@ mod tests {
     fn make_mutalbe(mut y: i32) {
         y += 1;
         println!("y: {}", y)
+    }
+
+    #[test]
+    fn test_iter() {
+        let arr = [String::from("a"), "b".to_string(), "c".to_string()];
+        let a1 = &arr[0];
+        // let mut arr_iter = arr.into_iter();
+        // let mut arr_iter = arr.iter();
+        let mut arr_iter = (&arr).into_iter();
+
+        assert_eq!(arr_iter.next(), Some(&"a".to_string()));
+        assert_eq!(arr_iter.next(), Some(&"b".to_string()));
+        assert_eq!(arr_iter.next(), Some(&"c".to_string()));
+        assert_eq!(arr_iter.next(), None);
+        let a2 = &arr[1];
     }
 }
 
