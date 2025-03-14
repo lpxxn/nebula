@@ -67,6 +67,10 @@ impl Animal for Cat {
     }
 }
 
+fn animal_sound(a: &impl Animal) {
+    a.make_sound();
+}
+
 #[cfg(test)]
 mod animal_tests {
     use super::*;
@@ -78,7 +82,8 @@ mod animal_tests {
         let cat = Cat;
         // dog.make_sound();
         // cat.make_sound();
-
+        animal_sound(&dog);
+        animal_sound(&cat);
         // 创建一个存储 trait 对象的向量
         let animals: Vec<Box<dyn Animal>> = vec![Box::new(dog), Box::new(cat)];
         // 遍历向量并调用每个 trait 对象的方法
@@ -87,7 +92,6 @@ mod animal_tests {
         }
     }
 }
-
 
 /*
 # enum_dispatch 的类型推导说明
