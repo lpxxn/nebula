@@ -16,6 +16,7 @@ mod test {
             *num += 1;
             println!("thread 1 add 1, value: {}", *num);
             panic!("Thread 1 panics, the lock will be poisoned!");
+            // 这里的锁会自动释放，但因为panic所以锁被标记为poisoned
         });
 
         thread::sleep(std::time::Duration::from_millis(200));
